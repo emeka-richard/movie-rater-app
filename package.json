@@ -1,0 +1,21 @@
+{
+  "name": "inspiroverse-app",
+  "version": "1.0.0",
+  "description": "InspiroVerse App",
+  "main": "index.js",
+  "scripts": {
+    "client-install": "npm install --prefix client",
+    "server-install": "npm install --prefix server",
+    "install": "npm run install client-install && npm run install server-install",
+
+    "client": "npm run dev --prefix client",
+    "server": "npm run dev --prefix server",
+    "dev": "npm run server & npm run client",
+
+    "deploy": "npm start --prefix server && npm run build --prefix client",
+
+    "test": "npm test --prefix server && npm test --prefix client"
+  },
+  "author": "Chukwuemeka Omeje",
+  "license": "ISC"
+}

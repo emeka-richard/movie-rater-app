@@ -1,0 +1,65 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Euphoria+Script&family=Inter:wght@100;200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lily+Script+One&display=swap');
+
+:root {
+--bg-color-1: #0e1f33;
+--bg-color-2: #f5f4f4f4;
+--bg-color-3: #cecece92;
+--bg-color-4: #a7a7a7c1;
+--bg-color-5: #d9d9d9d6;
+--bg-color-6: #f4f2f2f3;
+--word-color-1: #103661;
+--word-color-2: #0c243f;
+--word-color-3: #12181e;
+--word-color-4: #010b15;
+--color-1: #2263ad;
+--color-2: #221e24;
+}
+
+*,
+*::before,
+*::after {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+/* font-weight: normal; */
+}
+a {
+cursor: pointer;
+}
+
+body {
+width: 100%;
+height: 100vh;
+/* display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center; */
+color: var(--word-color-1);
+background: var(--word-color-3);
+transition:
+  color 0.5s,
+  background-color 0.5s;
+font-family:
+  'Inter',
+  /* 'Inter', */
+  /* 'Euphoria Script' */
+  -apple-system,
+  BlinkMacSystemFont,
+  'Segoe UI',
+  Roboto,
+  Oxygen,
+  Ubuntu,
+  Cantarell,
+  'Fira Sans',
+  'Droid Sans',
+  'Helvetica Neue', 
+  cursive,
+  sans-serif;
+/* font-size: 15px; */
+text-rendering: optimizeLegibility;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+
