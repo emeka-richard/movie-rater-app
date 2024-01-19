@@ -6,14 +6,15 @@
             <img :src="avatar" alt="user-img" />
           </div>
           <h3 class="dashboard-title">
-            {{ welcomeTxt }} {{ computedStoreData.firstName }}.
+            {{ welcomeTxt }}
           </h3>
+          <!-- <h3 class="dashboard-title">
+            {{ welcomeTxt }} {{ computedStoreData.firstName }}.
+          </h3> -->
         </section>
-        <!-- <section class="dashboard-time-holder">
-          <h3>{{ today }}</h3>
-        </section> -->
       </section>
-      <DashboardAnalytics />
+      <DashboardSearchComponent />
+      <MovieList />
     </section>
   </template>
   
@@ -23,16 +24,20 @@
   import { useStore } from "vuex";
   import maleIMG from "@/assets/imgs/h-img.png";
   // import femaleIMG from "@/assets/imgs/w-img.png";
-  import DashboardAnalytics from "@/components/dashboard-components/dashboardAnalytics.vue"
+  import DashboardSearchComponent from "@/components/dashboard-components/dashboardSearchComponent.vue"
+  // import DashboardView from "@/components/dashboard-components/dashboardView.vue"
+  import MovieList from "@/components/dashboard-components/MovieList.vue"
   const store = useStore();
   
   // const today = new Date().toUTCString().slice(0, 17) + " (GMT)";
   
   const computedStoreData = computed(() => {
     const userData = store.getters.getUser;
-    const firstName = userData.name.split(" ")[0];
-    const loggedIn = userData.loggedIn;
-    return { userData, firstName, loggedIn };
+    // const firstName = userData.name.split(" ")[0];
+    // const loggedIn = userData.loggedIn;
+    console.log(userData)
+    return { userData };
+    // return { userData, firstName, loggedIn };
   });
   
   const welcomeTxt =
@@ -51,7 +56,6 @@
         background: var(--bg-color-6);
         padding: .5rem 1rem;
         box-shadow: 0rem 0.125rem 0.25rem 0.125rem rgba(78, 78, 78, 0.282);
-        /* box-shadow: 0rem 0.125rem 0.25rem 0.125rem rgb(0, 0, 0, 0.1); */
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -64,7 +68,6 @@
         max-width: max-content;
         height: auto;
         display: flex;
-        /* flex-direction: column; */
         align-items: center;
         justify-content: center;
         gap: 0.875rem;
@@ -77,11 +80,9 @@
   
   .dashboard-wrapper {
     width: 100%;
-    max-width: 1000px;
-    height: 100vh;
-    background-color: var(--bg-color-6);
-    /* display: flex;
-    justify-content: center; */
+    /* height: 90vh; */
+    max-height: 100%;
+    background-color: var(--bg-color-4);
   }
   .dashboard-content-container {
     width: 100%;
@@ -99,17 +100,12 @@
   
   .dashboard-wecome-details {
     width: 100%;
-    /* max-width: max-content; */
     height: auto;
     display: flex;
-    /* flex-direction: column; */
     align-items: center;
     justify-content: center;
     gap: 0.875rem;
     border: 1px solid rgb(0, 0, 0, 0.1);
-    /* border: 1px solid var(--word-color-4); */
-    /* box-shadow: 0rem 0.125rem 0.25rem 0.125rem rgba(26, 26, 26, 0.076); */
-    /* box-shadow: 0rem 0.125rem 0.25rem 0.125rem rgb(0, 0, 0, 0.1); */
     padding: 0.5rem;
     border-radius: 0.5rem;
   }
@@ -117,10 +113,15 @@
   .user-img-tag {
     img {
       outline: 4px solid grey;
-      border: 4px solid var(--word-color-4);
+      border: 4px solid var(--color-3);
       border-radius: 50%;
       width: clamp(50px, 4vw, 100px);
       height: clamp(50px, 4vw, 100px);
+    }
+    img:hover {
+      outline: 2px solid var(--word-color-1);
+      border: 4px solid var(--bg-color-6);
+      cursor: pointer;
     }
   }
   .dashboard-title {
@@ -130,21 +131,6 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    /* text-align: justify; */
-  }
-  .dashboard-time-holder {
-    width: max-content;
-    height: max-content;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(187, 187, 187, 0.786);
-    padding: 0.5rem;
-    border-radius: 0.375rem;
-  }
-  .dashboard-time-holder h3 {
-    font-size: clamp(0.625rem, 2vw, 1.25rem);
-    font-weight: 300;
   }
   </style>
   

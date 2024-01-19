@@ -10,12 +10,14 @@
         label="First name"
         model-name="firstName"
         type-value="text"
+        aria-required="true"
       />
       <BaseInput
         v-model="user.lastName"
         label="Last Name"
         model-name="lastName"
         type-value="text"
+        aria-required="true"
       />
       <BaseSelect
         :options="countries"
@@ -27,12 +29,14 @@
         label="Email"
         model-name="email"
         type-value="email"
+        aria-required="true"
       />
       <BaseInput
         v-model="user.password"
         label="Password"
         model-name="password"
         type-value="password"
+        aria-required="true"
       />
       <button name="submit" type="submit" :disabled="!isButtonDisabled">
         Register
@@ -64,7 +68,7 @@
     return { loggedInUser, formStatus, countries };
   });
   
-  const formTitle = "InspiroVerse";
+  const formTitle = "Tell-Em";
   
   const user = ref({
     firstName: "",
@@ -74,7 +78,7 @@
     email: "",
     password: "",
   });
-  const gender = ["Select", "Male", "Female"]
+  // const gender = ["Select", "Male", "Female"]
   const countries = ["Select", ...computedData.value.countries ]
   const errorMessage = ref(null);
   
@@ -83,16 +87,18 @@
       user.value.password !== "" &&
       user.value.email !== "" &&
       user.value.nationality !== "" &&
-      user.value.gender !== "" &&
+      // user.value.gender !== "" &&
       user.value.firstName !== "" &&
       user.value.lastName !== ""
     );
   });
   
   const register = async () => {
+    if(user.value.firstName === "" || user.value.lastName === "" || user.value.nationality === "" || user.value.email === "" || user.value.password === "") return errorMessage.value = "Invalid email and password" 
+
     const userToBeRegistered = {
       name: user.value.firstName + " " + user.value.lastName,
-      gender: user.value.gender,
+      // gender: user.value.gender,
       country: user.value.nationality,
       email: user.value.email,
       pwd: user.value.password,

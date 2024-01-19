@@ -44,7 +44,7 @@
     return { loggedInUser, formStatus };
   });
   
-  const formTitle = "InspiroVerse";
+  const formTitle = "Tell-Em";
   
   const user = ref({
     email: "",
@@ -56,6 +56,7 @@
   });
   
   const login = async () => {
+    if(user.value.email === "" || user.value.password === "") return errorMessage.value = "Invalid email and password" 
     const userToBeAuthenticated = {
       email: user.value.email,
       pwd: user.value.password,
@@ -68,7 +69,8 @@
         // if(computedData.value.loggedInUser) router.push({ name: "dashboard" });
       })
       .catch((errMSG) => {
-        errorMessage.value = errMSG.message;
+        console.error(errMSG)
+        errorMessage.value = "Invalid email and password";
       });
   };
   

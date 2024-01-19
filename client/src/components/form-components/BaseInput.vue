@@ -24,9 +24,13 @@ const props = defineProps({
 
 
 <style scoped>
-input, label {
+label {
     font-size: clamp(1rem, 5vw, 1.5rem);
     font-weight: 800;
+}
+input {
+    font-size: clamp(1rem, 5vw, 1.5rem);
+    font-weight: 500;
 }
 label {
     margin-top: 1.125rem;
