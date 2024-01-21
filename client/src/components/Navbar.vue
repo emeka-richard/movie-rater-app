@@ -28,23 +28,23 @@
             <li v-if="computedProps.userStatus" @click="logout">Logout</li>
           </ul>
           <ul class="auth-link-container-1">
-            <li
-              v-if="!computedProps.userStatus"
-              v-for="linkItem in navbarContents.authlinks"
-              :key="linkItem.name"
-              @click="handleRouteLinks(linkItem)"
-            >
-              {{ linkItem.name }}
-            </li>
-            <li
-              v-if="computedProps.userStatus"
-              v-for="linkItem in navbarContents.navlinks"
-              :key="linkItem.name"
-              @click="handleRouteLinks(linkItem)"
-            >
-              {{ linkItem.name }}
-            </li>
-            <li v-if="computedProps.userStatus" @click="logout">Logout</li>
+              <li
+                v-if="!computedProps.userStatus"
+                v-for="linkItem in navbarContents.authlinks"
+                :key="linkItem.name"
+                @click="handleRouteLinks(linkItem)"
+              >
+                {{ linkItem.name }}
+              </li>
+              <li
+                v-if="computedProps.userStatus"
+                v-for="linkItem in navbarContents.navlinks"
+                :key="linkItem.name"
+                @click="handleRouteLinks(linkItem)"
+              >
+                {{ linkItem.name }}
+              </li>
+              <li v-if="computedProps.userStatus" @click="logout">Logout</li>
           </ul>
         </section>
         <section class="link-toggler" @click="toggleSVGMenuBar">
@@ -108,7 +108,9 @@ const handleRouteLinks = (navItem) => {
 
 const logout = () => {
   toggleSVGMenuBar();
-  store.dispatch("logout", computedProps.value.userData);
+  store.dispatch("logout", computedProps.value.userData).then(()=>{
+    
+  });
 };
 </script>
 
@@ -130,7 +132,8 @@ const logout = () => {
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
-      gap: 1rem;
+      gap: 2rem;
+      padding: 0.125rem;
     }
     .auth-link-container-1 li {
       width: 100%;
@@ -140,8 +143,18 @@ const logout = () => {
       text-align: start;
       justify-content: start;
       color: var(--bg-color-2);
-      border-radius: 0.25rem;
+      /* border-bottom: 2px solid var(--bg-color-6); */
       cursor: pointer;
+
+      &:hover {
+        padding: 1rem;
+        color: var(--color-3);
+        background-color: var(--bg-color-6);
+        border-radius: 0.25rem;
+        border: 2px solid var(--word-color-1);
+        cursor: pointer;
+        transition: all 300ms ease-in-out;
+      }
     }
   }
 }
@@ -149,6 +162,11 @@ const logout = () => {
 /* MOBILE & TABLET VIEW CSS - NAVBAR */
 .auth-link-container-1 {
   display: none;
+}
+nav {
+  position: static;
+  top: 0;
+  left: 0;
 }
 nav,
 .nav-wrapper {
@@ -160,7 +178,6 @@ nav,
 .nav-wrapper {
   background-color: var(--bg-color-7);
   padding: clamp(0.5rem, 3vw, 1rem) clamp(1rem, 5vw, 1.25rem);
-  /* background: transparent; */
   box-shadow: 0rem 0.0625rem 0.25rem 0.125rem rgba(255, 255, 255, 0.1);
 }
 .nav-container {

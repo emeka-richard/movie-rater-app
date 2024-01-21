@@ -29,7 +29,7 @@ app.use("/refresh", refreshTokenRouter)
 app.use("/logout", logoutRouter)
 
 app.use(verifyJWT)
-app.use("/collections", collectionsRouter)
+app.use("/movies", collectionsRouter)
 
 app.all("/*", (req, res)=>{
     res.status(404).json({message: "404 Not Found"})

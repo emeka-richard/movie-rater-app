@@ -51,34 +51,41 @@ export default new Vuex.Store({
       return axios
         .post("//localhost:8000/register", credentials)
         .then(({ data }) => {
-          commit("SET_USER_DATA", data);
-          commit("SET_FORM");
-        })
-        .catch((error) => {
-          throw Error(error.response.data.message);
-        });
-    },
-    login: async ({ commit }, credentials) => {
-      return axios
-        .post("//localhost:8000/login", credentials)
-        .then(({ data }) => {
           console.log(data)
           commit("SET_USER_DATA", data);
           commit("SET_FORM");
         })
         .catch((error) => {
-          throw Error(error.response.data.message);
+          console.log(error)
+          // throw Error(error.response.data.message);
+        });
+    },
+    login: async ({ commit }, credentials) => {
+      console.log(credentials)
+      return axios
+        .post("//localhost:8000/login", credentials)
+        .then((response) => {
+          console.log(response)
+          // console.log(data)
+          commit("SET_USER_DATA", data);
+          commit("SET_FORM");
+        })
+        .catch((error) => {
+          console.log(error)
+          // throw Error(error.response.data.message);
         });
     },
     setFormStatus({ commit }, actions) {
       commit("SET_FORM", actions);
     },
     logout: async ({ commit }, credentials) => {
-      commit("SET_FORM");
-      commit("CLEAR_USER");
 
       return axios
         .post("//localhost:8000/logout", credentials)
+        .then(()=>{
+          commit("SET_FORM");
+          commit("CLEAR_USER");
+            })
         .catch((error) => {
           throw Error(error.response.data.message);
         });

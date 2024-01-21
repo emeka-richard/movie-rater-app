@@ -67,6 +67,7 @@ const navigateLink = (e) => {
   text-align: center;
   justify-content: center;
   width: 100%;
+  /* height: 100vh; */
   margin: 0 auto;
   max-width: 1000px;
 }

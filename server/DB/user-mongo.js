@@ -18,8 +18,8 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     loggedIn: {
-        type: Boolean,
-        required: true
+        type: Object,
+        required: true,
     },
     refreshToken: {
         type: String,

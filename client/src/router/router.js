@@ -2,13 +2,31 @@ import { createRouter, createWebHistory } from 'vue-router';
 import AppLayout from '@/layouts/AppLayout.vue';
 import AuthLayout from '@/layouts/AuthLayout.vue';
 import HeroPage from '@/views/HeroPage.vue';
-import Dashboard from '@/views/Dashboard.vue';
-import Register from '@/views/Register.vue';
-import Login from '@/views/Login.vue';
+const Dashboard = ()=> import('@/views/Dashboard.vue')
+// import Dashboard from '@/views/Dashboard.vue';
+const Register = ()=> import('@/views/Register.vue')
+// import Register from '@/views/Register.vue';
+const Login = ()=> import('@/views/Login.vue')
+// import Login from '@/views/Login.vue';
 // import MovieList from '@/views/MovieList.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
+  scrollBehavior(to, from, savedPosition){
+    if(to.hash){
+      return {
+        el: to.hash,
+        behavior: 'smooth'
+      }
+    }
+    if(savedPosition){
+        return {
+          savedPosition,
+          behavior: 'smooth'
+        }
+    }
+    return { top: 0, behavior: 'smooth'}
+  },
   routes: [
     {
       path: '/',
@@ -24,14 +42,7 @@ const router = createRouter({
           path: 'dashboard',
           name: 'dashboard',
           component: Dashboard,
-          // meta: { requiresAuth: true },
-          // children: [
-          //   {
-          //     path: '',
-          //     name: 'views',
-          //     component: MovieList,
-          //   }
-          // ]
+          meta: { requiresAuth: true },
         },
       ],
     },
@@ -49,6 +60,11 @@ const router = createRouter({
         {
           path: '/register',
           name: 'register',
+          component: Register,
+        },
+        {
+          path: 'reset',
+          name: 'reset',
           component: Register,
         },
       ],

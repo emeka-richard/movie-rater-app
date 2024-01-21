@@ -1,24 +1,21 @@
 <template>
   <section class="movieList-wrapper">
     <!-- <section class="movieList-section-1"></section> -->
-    <section class="movieList-section-1">
+    <section class="movieList-section-1" ref="moviesRef">
       <div
         class="movieItem-container"
-        v-for="movie in movieArr"
+        v-for="movie in moviesList"
         :key="movie.id"
       >
-        <!-- <div class="movieItem-container-1"> -->
-        <img class="movie-img-tag" :src="movie.imgURL" :alt="movie.title" />
+        <!-- <img v-if="!isImgUrlLoaded" class="blur-img" /> -->
+        <img class="movie-img-tag" :src="movie.imgURL" :alt="movie.title" loading="lazy"/>
         <div class="movie-details">
           <h2>Title: {{ movie.title }}</h2>
           <h2>Year: {{ movie.year }}</h2>
           <p>
             Rated: <span>{{ movie.rated }}</span>
           </p>
-          <!-- <div class="rating-button-container"> -->
-          <button class="rating-btn">Rate</button>
-          <!-- </div> -->
-          <!-- </div> -->
+          <button class="rating-btn">Rate | Review</button>
         </div>
       </div>
     </section>
@@ -26,14 +23,22 @@
 </template>
 
 <script setup>
-import { provide } from "vue";
+import {ref, onMounted, onBeforeUnmount, provide, nextTick } from "vue";
 import gotIMG from "@/assets/imgs/got-img.png";
 import extIMG from "@/assets/imgs/ext-img.png";
 import rmIMG from "@/assets/imgs/rm-img.png";
 import lwIMG from "@/assets/imgs/lw-img.png";
 import fmIMG from "@/assets/imgs/fm-img.png";
+import fmSmall from "@/assets/imgs/fm-small.png";
+import lwSmall from "@/assets/imgs/lw-small.png";
+import rmSmall from "@/assets/imgs/rm-small.png";
+import extSmall from "@/assets/imgs/ext-small.png";
+import gotSmall from "@/assets/imgs/got-small.png";
 
-const movieArr = [
+const moviesRef = ref();
+const isImgUrlLoaded = ref(false);
+
+const movieArr2 = [
   {
     id: 1,
     title: "Game of Throne",
@@ -75,7 +80,78 @@ const movieArr = [
     imgURL: fmIMG,
   },
 ];
+const movieArr1 = [
+  {
+    id: 1,
+    title: "Game of Throne",
+    year: 2000,
+    genre: "Epic",
+    rated: "N/A",
+    imgURL: gotSmall,
+  },
+  {
+    id: 2,
+    title: "Extraction 2",
+    year: 2000,
+    genre: "N/A",
+    rated: "N/A",
+    imgURL: extSmall,
+  },
+  {
+    id: 3,
+    title: "RM",
+    year: 2000,
+    genre: "Epic",
+    rated: "N/A",
+    imgURL: rmSmall,
+  },
+  {
+    id: 4,
+    title: "LW",
+    year: 2000,
+    genre: "Epic",
+    rated: "N/A",
+    imgURL: lwSmall,
+  },
+  {
+    id: 5,
+    title: "FM",
+    year: 2000,
+    genre: "Epic",
+    rated: "N/A",
+    imgURL: fmSmall,
+  },
+];
 
+const moviesList = !isImgUrlLoaded.value ? movieArr1 : movieArr2
+
+onMounted(()=>{
+  nextTick(()=>{
+    window.addEventListener("scroll", onScroll)
+    onScroll();
+  })
+})
+onBeforeUnmount(()=>{
+  window.removeEventListener("scroll", onScroll)
+})
+
+const getMoviesImgUrl = ()=>{
+  
+}
+
+const onScroll = ()=>{
+  const movieSection = moviesRef["value"]
+  if(movieSection){
+    const marginTopMovie = movieSection.getBoundingClientRect().top;
+    const windowInnerHeight = window.innerHeight;
+    console.log(marginTopMovie, windowInnerHeight)
+    if((marginTopMovie - windowInnerHeight) < -50){
+      setTimeout(() => {
+        getMoviesImgUrl()
+      }, 1200);
+    }
+  }
+}
 // provide('movieList', movieArr)
 </script>
 
@@ -112,7 +188,7 @@ const movieArr = [
 }
 
 .rating-btn {
-  font-size: clamp(0.75rem, 1vw, 1.25rem);
+  font-size: clamp(0.75rem, 1vw, 1rem);
   font-size: 300;
   color: var(--bg-color-2);
   background-color: var(--color-3);
@@ -135,6 +211,23 @@ const movieArr = [
   border-radius: inherit;
   border-bottom-right-radius: unset;
   border-bottom-left-radius: unset;
+  /* transition: all 200ms ease-in-out; */
+  animation: opacity 1s linear;
+
+  &:hover {
+    opacity: .8;
+  }
+}
+@keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .movie-details {
   width: inherit;

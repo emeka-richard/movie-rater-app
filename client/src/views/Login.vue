@@ -1,6 +1,5 @@
 <template>
     <form @submit.prevent="login">
-    <!-- <form v-if="!computedData.formStatus" @submit.prevent="login"> -->
       <section class="form-header">
         <h1 class="form-title">{{ formTitle }}</h1>
         <h2 @click="setFormClose">&times;</h2>
@@ -24,9 +23,10 @@
       <small
         ><em
           >Don't have an account?
-          <RouterLink to="/register">Create One</RouterLink></em
+          <RouterLink class="link" to="/register">Create One</RouterLink></em
         ></small
       >
+      <small><RouterLink class="link" to="/register">Reset Password</RouterLink></small>
     </form>
   </template>
   
@@ -38,11 +38,11 @@
   const store = useStore();
   const router = useRouter();
   
-  const computedData = computed(() => {
-    const loggedInUser = store.getters.getUserData;
-    const formStatus = store.getters.getFormStatus;
-    return { loggedInUser, formStatus };
-  });
+  // const computedData = computed(() => {
+  //   const loggedInUser = store.getters.getUserData;
+  //   const formStatus = store.getters.getFormStatus;
+  //   return { loggedInUser, formStatus };
+  // });
   
   const formTitle = "Tell-Em";
   
@@ -56,21 +56,24 @@
   });
   
   const login = async () => {
-    if(user.value.email === "" || user.value.password === "") return errorMessage.value = "Invalid email and password" 
+    if(user.value.email === "" || user.value.password === "") return errorMessage.value = "Invalid email and password";
+    const logDate = new Date().toUTCString().slice(0, 17) + 'GMT'
     const userToBeAuthenticated = {
       email: user.value.email,
       pwd: user.value.password,
-      loggedIn: true
+      loggedIn: {
+        status: true,
+        time: logDate
+      }
     };
     store
       .dispatch("login", userToBeAuthenticated)
       .then(() => {
         router.push({ name: "dashboard" });
-        // if(computedData.value.loggedInUser) router.push({ name: "dashboard" });
       })
       .catch((errMSG) => {
         console.error(errMSG)
-        errorMessage.value = "Invalid email and password";
+        errorMessage.value = "Internal Server Error !!";
       });
   };
   
@@ -97,7 +100,10 @@
     height: auto;
     padding: clamp(1.25rem, 2vw, 1.75rem);
     position: absolute;
+    border: 1px solid var(--color-3);
     border-radius: 0.25rem;
+    padding-bottom: 5rem;
+    box-shadow: 0rem 0.125rem 1rem 0.125rem rgba(29, 28, 28, 0.512);
   }
   .form-header {
     width: 100%;
@@ -118,6 +124,7 @@
     outline: 1px solid grey;
     border-radius: 0.125rem;
     height: max-content;
+    cursor: pointer;
   }
   .form-title {
     font-family: "Lily Script One";
@@ -151,6 +158,8 @@
   }
   small {
     font-size: clamp(0.75rem, 5vw, 1.25rem);
+    margin-top: .5rem;
+
   }
   .error-display {
     display: flex;
@@ -166,5 +175,10 @@
     padding: 0.125rem;
     margin-bottom: 0.25rem;
   }
+  .link {
+  color: var(--word-color-4);
+  cursor: pointer;
+  margin-top: 3rem;
+}
   </style>
   
