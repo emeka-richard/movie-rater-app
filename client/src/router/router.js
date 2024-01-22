@@ -5,7 +5,7 @@ import HeroPage from '@/views/HeroPage.vue';
 const Dashboard = ()=> import('@/views/Dashboard.vue')
 const Register = ()=> import('@/views/Register.vue')
 const Login = ()=> import('@/views/Login.vue')
-const Reset = ()=> import('@/views/ResetPassword.vue')
+const Resetpassword = ()=> import('@/views/Resetpassword.vue')
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,11 +44,16 @@ const router = createRouter({
       ],
     },
     {
-      path: '/auth',
+      path: '/auth/',
       name: 'auth-layout',
       component: AuthLayout,
       redirect: { name: 'login'},
       children: [
+        // {
+        //   path:'',
+        //   name: 'reset',
+        //   component: ResetPassword
+        // },
         {
           path: '/login',
           name: 'login',
@@ -57,12 +62,12 @@ const router = createRouter({
         {
           path: '/register',
           name: 'register',
-          component: Register,
+            component: Register,
         },
         {
           path: '/reset',
           name: 'reset',
-          component: Reset,
+          component: Resetpassword,
         },
       ],
     },

@@ -10,14 +10,12 @@
         label="First name"
         model-name="firstName"
         type-value="text"
-        aria-required="true"
       />
       <BaseInput
         v-model="user.lastName"
         label="Last Name"
         model-name="lastName"
         type-value="text"
-        aria-required="true"
       />
       <BaseSelect
         :options="countries"
@@ -29,14 +27,12 @@
         label="Email"
         model-name="email"
         type-value="email"
-        aria-required="true"
       />
       <BaseInput
         v-model="user.password"
         label="Password"
         model-name="password"
         type-value="password"
-        aria-required="true"
       />
       <button name="submit" type="submit" :disabled="!isButtonDisabled">
         Register

@@ -7,6 +7,7 @@
         @input="$emit('update:modelValue', $event.target.value)"
         :type="typeValue"
         required
+        :aria-required="required"
         />
 </template>
 
@@ -17,7 +18,8 @@ const props = defineProps({
     label: {type: String, default: ""},
     modelValue: { type: [String, Number], default: ""},
     typeValue: { type: String, default: ""},
-    modelName: { type: String, default: ""}
+    modelName: { type: String, default: ""},
+    required: { type: Boolean, default: true}
 })
 
 </script>
