@@ -78,7 +78,6 @@
     email: "",
     password: "",
   });
-  // const gender = ["Select", "Male", "Female"]
   const countries = ["Select", ...computedData.value.countries ]
   const errorMessage = ref(null);
   
@@ -87,7 +86,6 @@
       user.value.password !== "" &&
       user.value.email !== "" &&
       user.value.nationality !== "" &&
-      // user.value.gender !== "" &&
       user.value.firstName !== "" &&
       user.value.lastName !== ""
     );
@@ -139,7 +137,7 @@
     align-items: flex-start;
     justify-content: center;
     background: var(--bg-color-2);
-    width: 100%;
+    width: 98%;
     max-width: 500px;
     height: auto;
     padding: 1rem;

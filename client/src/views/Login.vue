@@ -26,7 +26,7 @@
           <RouterLink class="link" to="/register">Create One</RouterLink></em
         ></small
       >
-      <small><RouterLink class="link" to="/register">Reset Password</RouterLink></small>
+      <small><RouterLink class="link" to="/reset">Reset Password</RouterLink></small>
     </form>
   </template>
   
@@ -95,7 +95,7 @@
     align-items: flex-start;
     justify-content: center;
     background: var(--bg-color-2);
-    width: 100%;
+    width: 98%;
     max-width: 500px;
     height: auto;
     padding: clamp(1.25rem, 2vw, 1.75rem);

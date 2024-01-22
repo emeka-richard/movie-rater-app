@@ -4,29 +4,18 @@
         <h1 class="form-title">{{ formTitle }}</h1>
         <h2 @click="setFormClose">&times;</h2>
       </section>
+      <h3>We would send a reset password link to your email.    </h3>
       <BaseInput
         v-model="user.email"
         model-name="email"
         label="Email"
         type-value="email"
       />
-      <!-- <BaseInput
-        v-model="user.password"
-        model-name="password"
-        label="Password"
-        type-value="password"
-      /> -->
       <button name="submit" type="submit" :disabled="!isButtonDisabled">
         Reset Password
       </button>
       <p v-if="errorMessage" class="error-display">{{ errorMessage }}</p>
-      <!-- <small
-        ><em
-          >Don't have an account?
-          <RouterLink class="link" to="/register">Create One</RouterLink></em
-        ></small
-      >
-      <small><RouterLink class="link" to="/register">Reset Password</RouterLink></small> -->
+      <RouterLink >Back to login</RouterLink>
     </form>
   </template>
   
@@ -51,7 +40,7 @@
   });
   const errorMessage = ref(null);
   const isButtonDisabled = computed(() => {
-    return user.value.password !== "";
+    return user.value.email !== "";
   });
   
   const reset = async () => {
@@ -89,7 +78,7 @@
     align-items: flex-start;
     justify-content: center;
     background: var(--bg-color-2);
-    width: 100%;
+    width: 98%;
     max-width: 500px;
     height: auto;
     padding: clamp(1.25rem, 2vw, 1.75rem);
@@ -129,6 +118,11 @@
     color: var(--word-color-1);
     border-radius: 0.25rem;
   }
+  h3 {
+    color: var(--word-color-2);
+    font-size: clamp(.75rem, 4vw, 1.125rem);
+    font-weight: 600;
+  }
   button {
     width: 100%;
     height: max-content;
@@ -137,8 +131,8 @@
     outline: none;
     border: none;
     background-color: var(--color-1);
-    margin-top: 3.125rem;
-    margin-bottom: 0.75rem;
+    margin-top: 1.25rem;
+    /* margin-bottom: 0.75rem; */
     font-size: clamp(1rem, 5vw, 1.5rem);
     font-weight: 600;
   }

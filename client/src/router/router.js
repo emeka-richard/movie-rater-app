@@ -3,12 +3,9 @@ import AppLayout from '@/layouts/AppLayout.vue';
 import AuthLayout from '@/layouts/AuthLayout.vue';
 import HeroPage from '@/views/HeroPage.vue';
 const Dashboard = ()=> import('@/views/Dashboard.vue')
-// import Dashboard from '@/views/Dashboard.vue';
 const Register = ()=> import('@/views/Register.vue')
-// import Register from '@/views/Register.vue';
 const Login = ()=> import('@/views/Login.vue')
-// import Login from '@/views/Login.vue';
-// import MovieList from '@/views/MovieList.vue';
+const Reset = ()=> import('@/views/ResetPassword.vue')
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -63,9 +60,9 @@ const router = createRouter({
           component: Register,
         },
         {
-          path: 'reset',
+          path: '/reset',
           name: 'reset',
-          component: Register,
+          component: Reset,
         },
       ],
     },
